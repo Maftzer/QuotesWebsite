@@ -3,8 +3,6 @@ package com.example.quotes.controller;
 import com.example.quotes.dto.QuoteDto;
 import com.example.quotes.model.Quote;
 import com.example.quotes.repository.QuoteRepository;
-
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
