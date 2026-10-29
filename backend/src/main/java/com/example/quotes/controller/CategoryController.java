@@ -2,7 +2,8 @@ package com.example.quotes.controller;
 
 import com.example.quotes.dto.CategoryDto;
 import com.example.quotes.repository.CategoryRepository;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,10 +20,9 @@ public class CategoryController {
     }
 
     @GetMapping
-    public List<CategoryDto> getAll() {
-        return categories.findAll(Sort.by("name")).stream()
-                .map(CategoryDto::from)
-                .toList();
+    public List<CategoryDto> getAll(@RequestParam(required = false) Integer limit) {
+        Pageable pageable = (limit == null) ? Pageable.unpaged() : PageRequest.of(0, Math.max(1, limit));
+        return categories.findAllWithCount(pageable);
     }
 }
 
